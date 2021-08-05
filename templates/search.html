@@ -1,0 +1,65 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %} 
+
+<html>
+<head>
+<style>
+  
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+<br><br><br><br><br><br><br><br>
+{% for p in pr %} 
+<div class="card">
+  <img src="{{p.img.url}}" alt="{{p.name}}" style="width:100%">
+<h1>{{p.name}}</h1>
+  <p class="price">Rs {{p.price}}</p>
+  <p>{{p.desc}}.</p>
+
+  {% if p.stock <= 0 %} 
+   <p style="color:red;"> Sorry. out of stock... </p>
+   {% else %} 
+  <p><button>Add to Cart</button></p>
+  <br>
+  <p><button>Back</button></p>
+{% endif %} 
+</div>
+
+{% empty %} 
+<h1 style="color: red;">Sorry. No matches Found for your search...</h1>
+<a href="/">Click here to go back</a>
+{% endfor %} 
+</body>
+</html>
+
+{% endblock %}

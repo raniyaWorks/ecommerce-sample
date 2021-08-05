@@ -1,0 +1,61 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %} 
+
+<html>
+<head>
+<style>
+  
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="card">
+  <img src="{{p.img.url}}" alt="{{p.name}}" style="width:100%">
+<h1>{{p.name}}</h1>
+  <p class="price">Rs {{p.price}}</p>
+  <p>{{p.desc}}.</p>
+
+  {% if p.stock <= 0 %} 
+   <p style="color:red;"> Sorry. out of stock... </p>
+   {% else %} 
+  <p><a href="{% url 'addcart' p.id %}"><button>Add to Cart</button></a></p>
+  <br>
+  <p><button>Back</button></p>
+{% endif %} 
+</div>
+
+</body>
+</html>
+
+{% endblock %}

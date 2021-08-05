@@ -1,0 +1,195 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %} 
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Rannz|FoodWorld</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<!--
+
+TemplateMo 546 Sixteen Clothing
+
+https://templatemo.com/tm-546-sixteen-clothing
+
+-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'vendor/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/css/templatemo-sixteen.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/css/owl.css' %}">
+    <style>
+      .dropbtn {
+        background-color: black;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: black;
+        color:white;
+
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      
+      .dropdown-content a:hover {background-color: yellow;}
+      
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      
+      .dropdown:hover .dropbtn {
+        background-color: black;
+      }
+
+      * {box-sizing: border-box;}
+
+.topnav input[type=text],button {
+float: left;
+padding: 6px;
+margin-top: 8px;
+margin-right: 16px;
+font-size: 17px;
+}
+
+@media screen and (max-width: 600px) {
+.topnav a, .topnav input[type=text] {
+
+  display: block;
+  text-align: left;
+  width: 100%;
+  margin: 0;
+  padding-right: 100;
+}
+
+.topnav input[type=text] {
+  border: 1px solid #ccc;
+}
+}
+
+      </style>
+  </head>
+
+  <body>
+
+    <div class="banner header-text">
+      <div class="owl-banner owl-carousel">
+
+    {% for i in bn %}
+        <div class="banner-item-02" style="background-image: url({{i.img.url}});">
+          <div class="text-content">
+            <h4>{{i.title1}}</h4>
+            <h2>{{i.title2}} </h2>
+          </div>
+        </div>
+        {% endfor %}
+  
+      
+      </div>
+  
+  
+    </div>
+    <!-- Banner Ends Here -->
+ 
+
+
+    <div class="latest-products">
+ 
+      <div class="container">
+      
+
+        <div class="topnav">
+          <form action="{% url 'search' %}" method="get">
+           
+                <input type="text" placeholder="Search.." name='q'>
+                <button type="submit"><i class="fa fa-search"></i></button>
+                
+              </form>
+              </div>
+        <div class="dropdown">
+          <button class="dropbtn">Dropdown</button>
+          
+          <div class="dropdown-content">
+            {% for i in link %} 
+          <a href={{i.get_url}}>{{i.name}}</a>
+     
+      {% endfor %}
+          </div>
+        </div>
+   <br><br>
+    <div class="row">
+          {% for i in pg.object_list %}
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="{{i.get_url}}"><img src="{{i.img.url}}" alt="{{i.name}}" style="width:350px; height:300px;;"></a>
+              <div class="down-content">
+                <a href="{{i.get_url}}"><h4>{{i.name}}</h4></a>
+                <h6>{{i.price}}</h6>
+                
+               <p> <b style="color: red;">Stock left : {{i.stock}}</b></p>
+          
+              </div>
+            </div>
+          </div>
+          {% endfor %} 
+      
+     
+        </div>
+      
+      </div>
+     
+    </div>
+
+    <div class="pg" style="text-align: right; padding-right: 500; padding-bottom: 200;;">
+{% for p in pg.paginator.page_range %} 
+    
+<a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p %} activate {% endif %}">{{p}}</a>
+{% endfor %}
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="{% static 'vendor/js/custom.js' %}"></script>
+    <script src="{% static 'vendor/js/owl.js' %}"></script>
+    <script src="{% static 'vendor/js/slick.js' %}"></script>
+    <script src="{% static 'vendor/js/isotope.js' %}"></script>
+    <script src="{% static 'vendor/js/accordions.js' %}"></script>
+
+
+
+  </body>
+
+</html>
+{% endblock %}
